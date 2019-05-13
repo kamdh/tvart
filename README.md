@@ -23,7 +23,8 @@ The files to run the TVART algorithm and examples are included here.
 * preprocess_neurotycho.py - preprocessing script to remove line noise and compute band power for neural example
 * example_neurotycho.m - neural activity example
 * other files: helper functions, iPython notebooks used to compare with SLDS,
-  switching_linear_comparison* and smooth_linear_comparison* run sweeps of test problems across N
+  switching_linear_comparison* and smooth_linear_comparison* run sweeps of test problems across N...
+  these are provided as-is and will require some tweaking to run
 
 ## data/
 

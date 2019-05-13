@@ -1,5 +1,37 @@
 function [lambda, A, B, C, cost_vec, varargout] = ...
         TVART_alt_min(data, window_size, r, varargin)
+    % TVART_alt_min 
+    %   Solve TVART problem using alternating minimization.
+    %
+    % Parameters:
+    %  data : N by time matrix of data
+    %  window_size : number of time points in window
+    %  r : rank
+    % 
+    % Output:
+    %  lambda : vector of scalings for components (all ones)
+    %  A : left spatial modes
+    %  B : right spatial modes
+    %  C : temporal modes
+    %  cost_vec : cost per iterate
+    %  X (optional) : data reshaped into tensor
+    %  Y (optional) : target data reshaped into tensor
+    %  rmse_vec : RMSE per iterate
+    %  
+    % Optional parameters: 
+    %  max_iter : maximum number of iterations (default: 20)
+    %  eta : Tikhonov regularization parameter (default: 0.1)
+    %  beta : temporal regularization parameter (default 0)
+    %  regularization : temporal regularization (default: 'TV',
+    %    options: 'TV', 'Spline', 'TV0')
+    %  center : fit an affine/centered model (default: 0)
+    %  iter_disp : display cost after this many iterations
+    %    (default: 1)
+    %  init : struct containing initialization (default: false)
+    %  atol : absolute tolerance (default: 1e-6)
+    %  rtol : relative tolerance (default: 1e-4)
+    %
+    
     % Input parsing, defaults
     max_iter = 20;
     iter_disp = 1;
