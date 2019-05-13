@@ -16,7 +16,7 @@ function [lambda, A, B, C, cost_vec, varargout] = ...
     %  cost_vec : cost per iterate
     %  X (optional) : data reshaped into tensor
     %  Y (optional) : target data reshaped into tensor
-    %  rmse_vec : RMSE per iterate
+    %  rmse_vec (optional) : RMSE per iterate
     %  
     % Optional parameters: 
     %  max_iter : maximum number of iterations (default: 20)
