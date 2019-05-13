@@ -9,11 +9,18 @@ Kameron Decker Harris, Aleksandr Aravkin, Rajesh Rao, and Bing Brunton.
 
 The files to run the TVART algorithm and examples are included here.
 
-
+* TVART_alt_min.m - main algorithm
 
 ## data/
 
 The data for the examples is stored here.
+You will need to carry out some extra steps to run all examples:
+
+### Worm behavior
+
+We obtained the code and data from Costa et al. from
+https://github.com/AntonioCCosta/local-linear-segmentation.
+Specifically, all that is needed is "worm_tseries.h5".
 
 ### Sea surface temperature
 
