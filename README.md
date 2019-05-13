@@ -47,7 +47,7 @@ The files "ersst4.nino.mth.81-10.ascii" and "PDO.txt" are from https://www.cpc.n
 
 ### Neural activity
 
-These data are kindly provided by the Neurotycho project:
+These data are kindly provided by the [Neurotycho project][http://neurotycho.org]:
 http://neurotycho.brain.riken.jp/download/base/20090525S1_Food-Tracking_K1_Zenas+Chao_mat_ECoG64-Motion8.zip.
 
 In order to prepare the data for our algorithm, you must run the preprocessing script.
@@ -55,3 +55,4 @@ In order to prepare the data for our algorithm, you must run the preprocessing s
 ## figures/
 
 After running the code, figures will be saved in this directory.
+We include some figures modified from Neurotycho http://neurotycho.org/food-tracking-task.
