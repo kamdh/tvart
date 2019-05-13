@@ -21,7 +21,8 @@ The files to run the TVART algorithm and examples are included here.
 * example_el_nino.m - sea surface temperature example
 * preprocess_neurotycho.py - preprocessing script to remove line noise and compute band power for neural example
 * example_neurotycho.m - neural activity example
-* other files: helper functions, iPython notebooks used to compare with SLDS, switching_linear_comparison* and smooth_linear_comparison* run sweeps of test problems across N
+* other files: helper functions, iPython notebooks used to compare with SLDS,
+  switching_linear_comparison* and smooth_linear_comparison* run sweeps of test problems across N
 
 ## data/
 
@@ -40,6 +41,7 @@ In order to run the "Sea surface temperature" example, you must download
 * sst.wkmean.1990-present.nc
 * lsmask.nc
 from  https://www.esrl.noaa.gov/psd/repository/entry/show/PSD+Climate+Data+Repository/Public/PSD+Datasets/NOAA+OI+SST/Weekly+and+Monthly/.
+
 The files "ersst4.nino.mth.81-10.ascii" and "PDO.txt" are from https://www.cpc.ncep.noaa.gov/data/indices/ersst4.nino.mth.81-10.ascii and http://research.jisao.washington.edu/pdo/PDO.latest.txt.
 
 ### Neural activity
