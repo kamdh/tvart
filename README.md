@@ -40,6 +40,7 @@ To just run our example, all that is needed is "worm_tseries.h5".
 In order to run the "Sea surface temperature" example, you must download
 * sst.wkmean.1990-present.nc
 * lsmask.nc
+
 from  https://www.esrl.noaa.gov/psd/repository/entry/show/PSD+Climate+Data+Repository/Public/PSD+Datasets/NOAA+OI+SST/Weekly+and+Monthly/.
 
 The files "ersst4.nino.mth.81-10.ascii" and "PDO.txt" are from https://www.cpc.ncep.noaa.gov/data/indices/ersst4.nino.mth.81-10.ascii and http://research.jisao.washington.edu/pdo/PDO.latest.txt.
@@ -48,6 +49,7 @@ The files "ersst4.nino.mth.81-10.ascii" and "PDO.txt" are from https://www.cpc.n
 
 These data are kindly provided by the Neurotycho project:
 http://neurotycho.brain.riken.jp/download/base/20090525S1_Food-Tracking_K1_Zenas+Chao_mat_ECoG64-Motion8.zip.
+
 In order to prepare the data for our algorithm, you must run the preprocessing script.
 
 ## figures/
