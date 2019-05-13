@@ -2,8 +2,6 @@ clear all
 close all
 
 addpath('~/work/MATLAB/')
-addpath('~/work/MATLAB/tensor_toolbox')
-addpath('~/work/MATLAB/export_fig')
 addpath('~/work/MATLAB/unlocbox')
 init_unlocbox();
 figdir = '../figures/';

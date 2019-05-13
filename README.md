@@ -8,6 +8,7 @@ Kameron Decker Harris, Aleksandr Aravkin, Rajesh Rao, and Bing Brunton.
 Dependencies:
 * MATLAB R2017b (not tested on earlier versions) with relevant toolboxes
 * UNLocBox https://epfl-lts2.github.io/unlocbox-html/
+* vline/hline https://www.mathworks.com/matlabcentral/fileexchange/1039-hline-and-vline
 * Python 2.7 or 3.6 with numpy, scipy (optional, for preprocessing neural example)
 
 ## src/
@@ -50,7 +51,7 @@ The files "ersst4.nino.mth.81-10.ascii" and "PDO.txt" are from https://www.cpc.n
 These data are kindly provided by the [Neurotycho project](http://neurotycho.org):
 http://neurotycho.brain.riken.jp/download/base/20090525S1_Food-Tracking_K1_Zenas+Chao_mat_ECoG64-Motion8.zip.
 
-In order to prepare the data for our algorithm, you must run the preprocessing script.
+In order to prepare the data, you must run the preprocessing script.
 
 ## figures/
 
