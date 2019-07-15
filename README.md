@@ -4,6 +4,7 @@
 This is the code repository for the TVART method, to accompany the
 paper "Time-varying Autoregression with Low Rank Tensors" by
 Kameron Decker Harris, Aleksandr Aravkin, Rajesh Rao, and Bing Brunton.
+[[arxiv link]](https://arxiv.org/abs/1905.08389)
 
 Dependencies:
 * MATLAB R2017b (not tested on earlier versions) with relevant toolboxes
