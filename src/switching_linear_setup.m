@@ -51,9 +51,9 @@ function [X, A1, A2] = switching_linear_setup(N, num_steps, sigma, offset)
     X(:, 1) = x0;
     for i = 2:num_steps
         if i < (num_steps)/2
-            X(:, i) = A1 * X(:, i-1) + rand(N,1) * noise_process;
+            X(:, i) = A1 * X(:, i-1) + randn(N,1) * noise_process;
         else
-            X(:, i) = A2 * X(:, i-1) + rand(N,1) * noise_process;
+            X(:, i) = A2 * X(:, i-1) + randn(N,1) * noise_process;
             if i == ceil((num_steps)/2)
                 X(:, i) = X(:, i) / norm(X(:, i)) * sqrt(N);
             end
