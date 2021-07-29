@@ -2,17 +2,19 @@ clear all
 close all
 addpath('~/work/MATLAB')
 
-rng(1);
+seed=1;
+rng(seed);
 
-figdir = '../figures/';
+figdir = ['../figures/test_rng_', num2str(seed), '/'];
+mkdir(figdir);
 
 %% base parameters
 M = 9;   % 4.5 weeks/month * 2 months 
 R = 6;
 downsample = 6;
 %% tensor DMD algorithm
-max_iter = 3000;             % iterations
-eta = 1e-3;                % Tikhonov
+max_iter = 300;             % iterations
+eta = 2e-3;                % Tikhonov
 beta = 1e4;                 % regularizatio
 center = 0;
                             %eta2 = 200/beta;            % closeness to relaxation variable
@@ -63,7 +65,11 @@ end
                   'regularization', 'spline', ...
                   'verbosity', 2);
 % Set B = A and restart!
-s = struct('A', A, 'B', A, 'C', C, 'lambda', lambda);
+if ~center
+    s = struct('A', A, 'B', A, 'C', C);
+else
+    s = struct('A', A, 'B', [A; B(end,:)], 'C', C);
+end
 [lambda, A, B, C, cost, Xten, Yten, rmse] = ...
      TVART_alt_min(X, M, R, ...
                    'center', center, ...

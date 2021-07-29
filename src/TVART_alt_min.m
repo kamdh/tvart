@@ -16,7 +16,7 @@ function [lambda, A, B, C, cost_vec, varargout] = ...
     %  cost_vec : cost per iterate
     %  X (optional) : data reshaped into tensor
     %  Y (optional) : target data reshaped into tensor
-    %  rmse_vec (optional) : RMSE per iterate
+    %  rmse_vec : RMSE per iterate
     %  
     % Optional parameters: 
     %  max_iter : maximum number of iterations (default: 20)
@@ -73,6 +73,7 @@ function [lambda, A, B, C, cost_vec, varargout] = ...
         fprintf('Running TVART alternating minimization\n');
         fprintf('\tregularization %s\n', regularization);
         fprintf('\tproximal = %d\n', proximal);
+        fprintf('\tcenter   = %d\n', center);
     end
     if verbosity > 1
         fprintf('\tbeta = %1.3g\n', beta);
@@ -93,6 +94,7 @@ function [lambda, A, B, C, cost_vec, varargout] = ...
     t = size(data, 2);
     
     T = floor((t-1) / window_size);
+    % throws out some data if not an integer multiple of M
     X = data(:, 1:end-1);
     X = X(:, 1:M*T);
     Y = data(:, 2:end);
@@ -118,12 +120,12 @@ function [lambda, A, B, C, cost_vec, varargout] = ...
     end
 
     % reshape the data into tensors
-    % throws out some data if not an integer multiple of M
-    if center == 0
+    if ~center
         X = reshape(X, [N, M, T]);
     else
         % append ones to input data
-        X = reshape([X; ones(1, M*T)], [N+1, M, T]);
+        X = reshape([X; 
+                     ones(1, M*T)], [N+1, M, T]);
     end
     Y = reshape(Y, [N, M, T]);
     
@@ -217,31 +219,35 @@ function [lambda, A, B, C, cost_vec, varargout] = ...
     rmse_vec = rmse_vec(1:iter);
     cost_vec = cost_vec(1:iter);
 
-    var_tot = 0;
-    var_int = 0;
-    var_aff = 0;
-    for k = 1:T
-        Dk = diag(C(k, :));
-        Ypred_k = A * diag(lambda) * Dk * B' * X(:,:,k);
-        var_aff = var_aff + norm(Y(:,:,k) - Ypred_k, 'fro')^2;
-        if center
-            Ypred_int = A * diag(lambda) * Dk * B(end, :)' * ...
-                ones(1, size(Ypred_k, 2));
-            var_int = var_int + norm(Y(:,:,k) - Ypred_int, ...
-                                     'fro')^2;
-        else
-            var_int = var_int + norm(Y(:,:,k), 'fro')^2;
-        end
-        var_tot = var_tot + norm(Y(:,:,k), 'fro')^2;
-    end
-    var_tot = var_tot / (N*M*T);
-    var_int = var_int / (N*M*T);
-    var_aff = var_aff / (N*M*T);
-    fprintf('total var:\t\t%1.3f\n', var_tot);
-    fprintf('intercept resid var:\t%1.3f, %1.3g%%\n', var_int, ...
-            var_int / var_tot* 100);
-    fprintf('affine model resid var:\t%1.3f, %1.3g%%\n', var_aff, ...
-            var_aff / var_tot* 100);
+    % var_tot = 0;
+    % var_int = 0;
+    % var_aff = 0;
+    % for k = 1:T
+    %     Dk = diag(C(k, :));
+    %     if center
+    %         Ypred_int = A * diag(lambda) * Dk * B(end, :)' * ...
+    %             ones(1, size(Ypred_k, 2));
+    %         Ypred_k = A * diag(lambda) * Dk * B(1:end-1, :)' * X(:,:,k) ...
+    %                   + Ypred_int;
+    %         var_aff = var_aff + norm(Y(:,:,k) - Ypred_k - Ypred_int, ...
+    %                                  'fro')^2;
+    %         var_int = var_int + norm(Y(:,:,k) - Ypred_int, ...
+    %                                  'fro')^2;
+    %     else
+    %         Ypred_k = A * diag(lambda) * Dk * B' * X(:,:,k);
+    %         var_aff = var_aff + norm(Y(:,:,k) - Ypred_k, 'fro')^2;
+    %         var_int = var_int + norm(Y(:,:,k), 'fro')^2;
+    %     end
+    %     var_tot = var_tot + norm(Y(:,:,k), 'fro')^2;
+    % end
+    % var_tot = var_tot / (N*M*T);
+    % var_int = var_int / (N*M*T);
+    % var_aff = var_aff / (N*M*T);
+    % fprintf('total var:\t\t%1.3f\n', var_tot);
+    % fprintf('intercept resid var:\t%1.3f, %1.3g%%\n', var_int, ...
+    %         var_int / var_tot* 100);
+    % fprintf('affine model resid var:\t%1.3f, %1.3g%%\n', var_aff, ...
+    %         var_aff / var_tot* 100);
     
     if nargout >= 6
         varargout{1} = X;

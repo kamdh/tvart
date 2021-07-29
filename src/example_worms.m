@@ -72,6 +72,15 @@ T = cluster(Z, 'maxclust', numclust);
 
 phase = atan2(worm_data(2,:), worm_data(1,:));
 
+
+%% Load Costa model results for comparison
+Costa_data = load(['~/src/local-linear-segmentation/sample_data/' ...
+                   'worm_1_results.mat']);
+C_segmentation = (Costa_data.segmentation(:, 1) + ...
+    Costa_data.segmentation(:, 2)) / 2; % midpoints of windows
+C_labels = mod(3 - Costa_data.cluster_labels, 3) + 1 % reorder
+
+
 figure
 ax1 = subplot(4, 1, 1);
 plot(1:length(worm_data), worm_data, 'color', [0,0,0]+0.4);
@@ -88,14 +97,23 @@ plot(M/2 + (1:M:M*length(C)), C);
 title('Temporal modes')
 %ylim([0.06, 0.077])
 ax4 = subplot(4, 1, 4);
+hold on
 plot(M/2 + (1:M:M*length(C)), T, 'ks-');
+plot(C_segmentation, C_labels, 'ko--');
+text(10, 1.5, 'forward', 'Color', 'red')
+text(65, 1.5, 'turn', 'Color', 'red')
+text(140, 1.5, 'backward', 'Color', 'red')
+legend({'TVART', 'Costa et al.'})
 ylim([0.8, numclust+.2])
+yticks([1,2,3])
+box on
 xlabel('Time step')
-title('Cluster')
+title('Clusters')
 linkaxes([ax1 ax2 ax3 ax4], 'x')
 set(gcf, 'Color', 'w', 'Position', [100 200 600 700]);
 set(gcf, 'PaperUnits', 'inches', ...
-         'PaperPosition', [0 0 6.5 7.5], 'PaperPositionMode', 'manual');
+         'PaperPosition', [0 0 6.5 7.5], 'PaperPositionMode', ...
+         'manual');
 print('-depsc2', '-loose', '-r200', [figdir 'example_worms.eps']);
 
 elapsedtime = toc();
